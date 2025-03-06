@@ -1,8 +1,10 @@
 import { useState } from "react";
 import FileExtensionSelection from "./FileExtensionSelection";
+import SelectionButtons from "./SelectionButtons";
 import { FILE_FORMATS } from "../data/format";
 
 export default function FileTypeSelection() {
+
   const [checkedState, setCheckedState] = useState(
     Object.keys(FILE_FORMATS).reduce((acc, key) => {
       acc[key] = true; // Initially all checked
@@ -15,62 +17,51 @@ export default function FileTypeSelection() {
     setCheckedState((prevState) => ({
       ...prevState,
       [name]: checked,
-    }));
-    console.log(`${name} was ${checked ? "checked" : "unchecked"}`);
+    }));;
   };
 
-  const selectAll = () => {
-    const selectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
+  const handleSelectAll = () => {
+    const selectAllCheckedState = Object.keys(checkedState).reduce((acc, key) => {
       acc[key] = true;
       return acc;
     }, {});
-    setCheckedState(selectAllState);
+
+
+    setCheckedState(selectAllCheckedState);
   };
 
-  const deselectAll = () => {
-    const deselectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
+  const handleDeselectAll = () => {
+    const deselectAllCheckedState = Object.keys(checkedState).reduce((acc, key) => {
       acc[key] = false;
       return acc;
     }, {});
-    setCheckedState(deselectAllState);
+
+    setCheckedState(deselectAllCheckedState);
   };
 
   return (
     <div>
-      <h2 className="font-bold text-2xl">Select file type(s)</h2>
-      {Object.keys(FILE_FORMATS).map((key) => (
-        <div key={key}>
-          <h3 className="text-xl font-medium capitalize">
-            <input
-              className="mr-2"
-              type="checkbox"
-              name={key}
-              checked={checkedState[key]}
-              onChange={handleCheckboxChange}
-            />
-            {key}
-          </h3>
-          <FileExtensionSelection
-            extensions={FILE_FORMATS[key]}
-            isChecked={checkedState[key]}
-          />
-        </div>
-      ))}
-      <div className="flex gap-4 my-2">
-        <button
-          className="bg-blue-500 hover:bg-blue-700"
-          onClick={selectAll}
-          type="button"
-        >
-          Select All
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700"
-          onClick={deselectAll}
-          type="button"
-        >
-          Unselect All
-        </button>
+      <h2 className="text-xl font-bold">Select File Type</h2>
+      {
+        Object.keys(FILE_FORMATS).map((file => {
+          return (
+            <div key={file}>
+              <input
+                className="mr-2 capitalize"
+                type="checkbox"
+                name={file}
+                checked={checkedState[file]}
+                onChange={handleCheckboxChange}
+              />
+              <span className="capitalize">{file}</span>
+              <FileExtensionSelection fileType={file} formats={FILE_FORMATS} />
+            </div>
+          )
+        }))
+      }
+      <div className="flex my-2 gap-4">
+        <SelectionButtons text="Select All" onClick={handleSelectAll} />
+        <SelectionButtons text="Unselect All" onClick={handleDeselectAll} />
       </div>
     </div>
   );
