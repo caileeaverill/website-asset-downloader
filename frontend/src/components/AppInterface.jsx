@@ -9,7 +9,7 @@ export default function AppInterface() {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:8000/send-data-to-downloader", {
+      const res = await fetch("http://localhost:8000/your-endpoint", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
