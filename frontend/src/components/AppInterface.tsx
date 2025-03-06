@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import UrlSubmit from "./UrlSubmit";
 import FileTypeSelection from "./FileTypeSelection";
 

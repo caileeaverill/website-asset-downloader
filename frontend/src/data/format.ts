@@ -1,4 +1,9 @@
-export const FILE_FORMATS = {
+interface Format {
+    name: string;
+    extensions: string[];
+}
+
+export const FILE_FORMATS: Record<string, Format[]> = {
     document: [
         { name: "PDF", extensions: ["pdf"] },
         { name: "Excel", extensions: ["xls", "xlsx"] },

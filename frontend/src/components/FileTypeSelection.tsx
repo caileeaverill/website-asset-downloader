@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FILE_FORMATS } from "../data/FILE_FORMATS";
+import { FILE_FORMATS } from "../data/format";
 
 export default function FileTypeSelection() {
   const [checked, setChecked] = useState(false);
