@@ -4,12 +4,12 @@ import FileTypeSelection from "./FileTypeSelection";
 import Buttons from "./Buttons";
 
 export default function AppInterface() {
-  const [getUrl, setGetUrl] = useState("");
+  const [getUrl, setGetUrl] = useState("https://picsum.photos/200/300");
   const [response, setResponse] = useState(null);
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:8000/your-endpoint", {
+      const res = await fetch("http://localhost:8000/send-data-to-downloader", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export default function AppInterface() {
       }
 
       const result = await res.json();
-      setResponse(result); // Store the response from the server
+      setResponse(result);
     } catch (error) {
       console.error("There was an error sending data to the server:", error);
     }
@@ -35,7 +35,12 @@ export default function AppInterface() {
       <UrlSubmit getUrl={getUrl} setGetUrl={setGetUrl} />
       <FileTypeSelection />
       <Buttons className={"bg-blue-500 hover:bg-blue-600"} text="Send Data" onClick={handleSubmit} />
-      {response && <div>Server Response: {JSON.stringify(response)}</div>}
+      {response && (
+        <div>
+          <p>{response.message}</p>
+          <p>{response.result}</p>
+        </div>
+      )}
     </div>
   );
 }

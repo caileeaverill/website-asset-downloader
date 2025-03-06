@@ -7,7 +7,7 @@ export default function FileTypeSelection() {
 
   const [checkedState, setCheckedState] = useState(
     Object.keys(FILE_FORMATS).reduce((acc, key) => {
-      acc[key] = true; // Initially all checked
+      acc[key] = true;
       return acc;
     }, {})
   );
@@ -18,7 +18,6 @@ export default function FileTypeSelection() {
       ...prevState,
       [name]: checked,
     }));;
-    console.log(name)
   };
 
   const handleSelectAll = () => {
