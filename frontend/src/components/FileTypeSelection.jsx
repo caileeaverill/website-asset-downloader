@@ -54,7 +54,7 @@ export default function FileTypeSelection() {
                 onChange={handleCheckboxChange}
               />
               <span className="capitalize">{file}</span>
-              <FileExtensionSelection fileType={file} formats={FILE_FORMATS} />
+              <FileExtensionSelection fileType={file} formats={FILE_FORMATS} checked={checkedState[file]} />
             </div>
           )
         }))
