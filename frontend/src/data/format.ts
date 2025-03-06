@@ -4,7 +4,7 @@ interface Format {
 }
 
 export const FILE_FORMATS: Record<string, Format[]> = {
-    document: [
+    documents: [
         { name: "PDF", extensions: ["pdf"] },
         { name: "Excel", extensions: ["xls", "xlsx"] },
         { name: "Word", extensions: ["doc", "docx"] },
@@ -13,7 +13,7 @@ export const FILE_FORMATS: Record<string, Format[]> = {
         { name: "PowerPoint", extensions: ["ppt", "pptx"] },
         { name: "XML", extensions: ["xml"] }
     ],
-    image: [
+    images: [
         { name: "JPEG", extensions: ["jpg", "jpeg"] },
         { name: "PNG", extensions: ["png"] },
         { name: "GIF", extensions: ["gif"] },
@@ -22,7 +22,7 @@ export const FILE_FORMATS: Record<string, Format[]> = {
         { name: "AVIF", extensions: ["avif"] },
         { name: "Webp", extensions: ["webp"] },
     ],
-    video: [
+    videos: [
         { name: "MP4", extensions: ["mp4"] },
         { name: "WebM", extensions: ["webm"] },
         { name: "OGG", extensions: ["ogv"] },
@@ -36,7 +36,7 @@ export const FILE_FORMATS: Record<string, Format[]> = {
         { name: "WAV", extensions: ["wav"] },
         { name: "FLAC", extensions: ["flac"] }
     ],
-    archive: [
+    archives: [
         { name: "ZIP", extensions: ["zip"] },
         { name: "GZIP", extensions: ["gz"] },
         { name: "TAR", extensions: ["tar"] },

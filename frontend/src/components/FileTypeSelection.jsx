@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FileExtensionSelection from "./FileExtensionSelection";
-import SelectionButtons from "./SelectionButtons";
+import Buttons from "./Buttons";
 import { FILE_FORMATS } from "../data/format";
 
 export default function FileTypeSelection() {
@@ -18,6 +18,7 @@ export default function FileTypeSelection() {
       ...prevState,
       [name]: checked,
     }));;
+    console.log(name)
   };
 
   const handleSelectAll = () => {
@@ -45,9 +46,9 @@ export default function FileTypeSelection() {
       {
         Object.keys(FILE_FORMATS).map((file => {
           return (
-            <div key={file}>
+            <div className="flex flex-wrap items-center my-2" key={file}>
               <input
-                className="mr-2 capitalize"
+                className="mr-2 capitalize h-5 w-5"
                 type="checkbox"
                 name={file}
                 checked={checkedState[file]}
@@ -59,9 +60,9 @@ export default function FileTypeSelection() {
           )
         }))
       }
-      <div className="flex my-2 gap-4">
-        <SelectionButtons text="Select All" onClick={handleSelectAll} />
-        <SelectionButtons text="Unselect All" onClick={handleDeselectAll} />
+      <div className="flex mt-4 gap-4">
+        <Buttons className="bg-lime-700 hover:bg-lime-800" text="Select All" onClick={handleSelectAll} />
+        <Buttons className="bg-rose-700 hover:bg-rose-800" text="Deselect All" onClick={handleDeselectAll} />
       </div>
     </div>
   );

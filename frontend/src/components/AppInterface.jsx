@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UrlSubmit from "./UrlSubmit";
 import FileTypeSelection from "./FileTypeSelection";
+import Buttons from "./Buttons";
 
 export default function AppInterface() {
   const [getUrl, setGetUrl] = useState("");
@@ -30,12 +31,10 @@ export default function AppInterface() {
   };
 
   return (
-    <div className="bg-neutral-800 p-6 flex flex-col gap-4">
+    <div className="bg-neutral-800 p-6 flex flex-col gap-4 rounded-2xl">
       <UrlSubmit getUrl={getUrl} setGetUrl={setGetUrl} />
       <FileTypeSelection />
-      <button className="bg-blue-500 hover:bg-blue-700" onClick={handleSubmit}>
-        Send Data
-      </button>
+      <Buttons className={"bg-blue-500 hover:bg-blue-600"} text="Send Data" onClick={handleSubmit} />
       {response && <div>Server Response: {JSON.stringify(response)}</div>}
     </div>
   );

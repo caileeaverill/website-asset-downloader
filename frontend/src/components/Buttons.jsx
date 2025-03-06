@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function SelectionButtons({ text, onClick }) {
+export default function Buttons({ text, onClick, className }) {
 
     return (
         <>
             <button
                 type="button"
-                className="bg-lime-700 hover:bg-lime-800 text-white rounded"
+                className={`text-white rounded ${className}`}
                 onClick={onClick}
             >
                 {text}
