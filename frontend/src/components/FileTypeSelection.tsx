@@ -1,29 +1,43 @@
 import { useState } from "react";
 import { FILE_FORMATS } from "../data/format";
 
-export default function FileTypeSelection() {
-  const [checked, setChecked] = useState(false);
+interface CheckboxState {
+  [key: string]: boolean;
+}
 
-  const handleCheckboxChange = () => {
-    setChecked(!checked);
+export default function FileTypeSelection() {
+  const [checkedState, setCheckedState] = useState<CheckboxState>(
+    Object.keys(FILE_FORMATS).reduce((acc, key) => {
+      acc[key] = false;
+      return acc;
+    }, {} as CheckboxState)
+  );
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setCheckedState((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
   };
 
   return (
     <div>
       <h2 className="font-bold text-2xl">Select file type(s)</h2>
       {Object.keys(FILE_FORMATS).map((key) => (
-        <div>
+        <div key={key}>
           <p className="capitalize">
             <input
               className="mr-2"
               type="checkbox"
-              checked={checked}
+              name={key}
+              checked={checkedState[key]}
               onChange={handleCheckboxChange}
             />
             {key}
           </p>
           {FILE_FORMATS[key].map((format) => (
-            <div className="hidden">
+            <div key={format.name} className="hidden">
               <p>
                 {`.${
                   format.extensions.length > 1
