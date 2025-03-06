@@ -30,7 +30,7 @@ export default function AppInterface() {
   };
 
   return (
-    <div>
+    <div className="bg-neutral-800 p-6 flex flex-col gap-4">
       <UrlSubmit getUrl={getUrl} setGetUrl={setGetUrl} />
       <FileTypeSelection />
       <button onClick={handleSubmit}>Send Data</button>
