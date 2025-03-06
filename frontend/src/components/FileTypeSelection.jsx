@@ -2,19 +2,15 @@ import { useState } from "react";
 import FileExtensionSelection from "./FileExtensionSelection";
 import { FILE_FORMATS } from "../data/format";
 
-interface CheckboxState {
-  [key: string]: boolean;
-}
-
 export default function FileTypeSelection() {
-  const [checkedState, setCheckedState] = useState<CheckboxState>(
+  const [checkedState, setCheckedState] = useState(
     Object.keys(FILE_FORMATS).reduce((acc, key) => {
       acc[key] = true; // Initially all checked
       return acc;
-    }, {} as CheckboxState)
+    }, {})
   );
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setCheckedState((prevState) => ({
       ...prevState,
@@ -27,7 +23,7 @@ export default function FileTypeSelection() {
     const selectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
       acc[key] = true;
       return acc;
-    }, {} as CheckboxState);
+    }, {});
     setCheckedState(selectAllState);
   };
 
@@ -35,7 +31,7 @@ export default function FileTypeSelection() {
     const deselectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
       acc[key] = false;
       return acc;
-    }, {} as CheckboxState);
+    }, {});
     setCheckedState(deselectAllState);
   };
 
@@ -44,7 +40,7 @@ export default function FileTypeSelection() {
       <h2 className="font-bold text-2xl">Select file type(s)</h2>
       {Object.keys(FILE_FORMATS).map((key) => (
         <div key={key}>
-          <p className="capitalize">
+          <h3 className="text-xl font-medium capitalize">
             <input
               className="mr-2"
               type="checkbox"
@@ -53,7 +49,7 @@ export default function FileTypeSelection() {
               onChange={handleCheckboxChange}
             />
             {key}
-          </p>
+          </h3>
           <FileExtensionSelection
             extensions={FILE_FORMATS[key]}
             isChecked={checkedState[key]}
@@ -62,14 +58,14 @@ export default function FileTypeSelection() {
       ))}
       <div className="flex gap-4 my-2">
         <button
-          className="bg-blue-500 text-white py-2 px-4"
+          className="bg-blue-500 hover:bg-blue-700"
           onClick={selectAll}
           type="button"
         >
           Select All
         </button>
         <button
-          className="bg-blue-500 text-white py-2 px-4"
+          className="bg-blue-500 hover:bg-blue-700"
           onClick={deselectAll}
           type="button"
         >

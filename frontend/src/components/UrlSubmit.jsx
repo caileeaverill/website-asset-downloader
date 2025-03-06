@@ -1,9 +1,4 @@
-interface UrlSubmitProps {
-  getUrl: string;
-  setGetUrl: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function UrlSubmit({ getUrl, setGetUrl }: UrlSubmitProps) {
+export default function UrlSubmit({ getUrl, setGetUrl }) {
   return (
     <>
       <input

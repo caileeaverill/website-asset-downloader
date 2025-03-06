@@ -33,7 +33,9 @@ export default function AppInterface() {
     <div className="bg-neutral-800 p-6 flex flex-col gap-4">
       <UrlSubmit getUrl={getUrl} setGetUrl={setGetUrl} />
       <FileTypeSelection />
-      <button onClick={handleSubmit}>Send Data</button>
+      <button className="bg-blue-500 hover:bg-blue-700" onClick={handleSubmit}>
+        Send Data
+      </button>
       {response && <div>Server Response: {JSON.stringify(response)}</div>}
     </div>
   );

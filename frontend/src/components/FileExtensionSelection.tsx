@@ -1,12 +1,4 @@
-interface FileExtensionSelectionProps {
-  extensions: { name: string; extensions: string[] }[];
-  isChecked: boolean; // Indicates whether the parent checkbox is checked
-}
-
-const FileExtensionSelection = ({
-  extensions,
-  isChecked,
-}: FileExtensionSelectionProps) => {
+const FileExtensionSelection = ({ extensions, isChecked }) => {
   return (
     <div className="pl-4">
       {extensions.map((format) => (
