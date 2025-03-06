@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FileExtensionSelection from "./FileExtensionSelection";
 import { FILE_FORMATS } from "../data/format";
 
 interface CheckboxState {
@@ -8,7 +9,7 @@ interface CheckboxState {
 export default function FileTypeSelection() {
   const [checkedState, setCheckedState] = useState<CheckboxState>(
     Object.keys(FILE_FORMATS).reduce((acc, key) => {
-      acc[key] = false;
+      acc[key] = true; // Initially all checked
       return acc;
     }, {} as CheckboxState)
   );
@@ -19,6 +20,23 @@ export default function FileTypeSelection() {
       ...prevState,
       [name]: checked,
     }));
+    console.log(`${name} was ${checked ? "checked" : "unchecked"}`);
+  };
+
+  const selectAll = () => {
+    const selectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
+      acc[key] = true;
+      return acc;
+    }, {} as CheckboxState);
+    setCheckedState(selectAllState);
+  };
+
+  const deselectAll = () => {
+    const deselectAllState = Object.keys(FILE_FORMATS).reduce((acc, key) => {
+      acc[key] = false;
+      return acc;
+    }, {} as CheckboxState);
+    setCheckedState(deselectAllState);
   };
 
   return (
@@ -36,24 +54,25 @@ export default function FileTypeSelection() {
             />
             {key}
           </p>
-          {FILE_FORMATS[key].map((format) => (
-            <div key={format.name} className="hidden">
-              <p>
-                {`.${
-                  format.extensions.length > 1
-                    ? format.extensions.join("  .")
-                    : format.extensions[0]
-                }`}
-              </p>
-            </div>
-          ))}
+          <FileExtensionSelection
+            extensions={FILE_FORMATS[key]}
+            isChecked={checkedState[key]}
+          />
         </div>
       ))}
       <div className="flex gap-4 my-2">
-        <button className="bg-blue-500 text-white py-2 px-4" type="button">
+        <button
+          className="bg-blue-500 text-white py-2 px-4"
+          onClick={selectAll}
+          type="button"
+        >
           Select All
         </button>
-        <button className="bg-blue-500 text-white py-2 px-4" type="button">
+        <button
+          className="bg-blue-500 text-white py-2 px-4"
+          onClick={deselectAll}
+          type="button"
+        >
           Unselect All
         </button>
       </div>
